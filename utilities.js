@@ -1,13 +1,8 @@
-const fs = require("fs");
-const path = require("path");
 
-
-function loadChuck(){
+function loadChuck(onSuccess){
     const url = "https://api.chucknorris.io/jokes/random";
-        fetch(url).then(response => response.json()).then(data => console.log(data))
+        fetch(url).then(response => response.json()).then(data => onSuccess(data));
     };
-loadChuck()
 
-    module.exports = {
-        loadChuck
-      };
+
+    module.exports = loadChuck;
