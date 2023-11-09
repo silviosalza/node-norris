@@ -15,14 +15,26 @@ const loadChuck = require("./utilities")
  //importo le funzioni da utilities
  
 //2. Creo Server
+arrayQuotes = []
 
 const server = http.createServer((req, res) => {
     loadChuck((data) => {
-      
+
+      arrayQuotes.push(data.value)
+      console.log(arrayQuotes);
+      html = [];
+      html.push("<ul>")
+      for(let i = 0; i < arrayQuotes.length; i++) {
+        html.push(`<li>${arrayQuotes[i]}</li>`);
+      }
+      html.push("</ul>")
+
+
       res.setHeader("Content-Type", "text/html");
+      res.end(html.join(""));
   
-      res.end(`<h2>${data.value}</h2>`);
     });
+    
   });
   
   server.listen(port, function(){
