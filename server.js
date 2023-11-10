@@ -19,6 +19,12 @@ arrayQuotes = []
 
 const server = http.createServer((req, res) => {
     loadChuck((data) => {
+      // remove favicon request
+  if (req.url === "/favicon.ico") {
+    res.writeHead(200, { "Content-Type": "image/x-icon" });
+    res.end();
+    return;
+  }
 
       arrayQuotes.push(data.value)
       console.log(arrayQuotes);
